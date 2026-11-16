@@ -19,7 +19,8 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists in the form input fi
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1.Payload Used: "><script>alert("First")</script> and "><script>alert("Last")</script>
 
-<img width="1917" height="971" alt="1" src="https://github.com/user-attachments/assets/1f07bea9-5847-458e-aa14-b14238c712e6" />
+<img width="1920" height="976" alt="4" src="https://github.com/user-attachments/assets/3931139d-444f-4467-a1e1-afd28246f5e7" />
+
 
 2.The reflection of input inside form attributes and the resulting sequential alert executions.
 
