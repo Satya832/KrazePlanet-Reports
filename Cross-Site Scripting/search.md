@@ -21,8 +21,7 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists in the form input fi
 
 <img width="1917" height="971" alt="1" src="https://github.com/user-attachments/assets/1f07bea9-5847-458e-aa14-b14238c712e6" />
 
-
-2.the reflection of input inside form attributes and the resulting sequential alert executions.
+2.The reflection of input inside form attributes and the resulting sequential alert executions.
 
 <img width="1917" height="966" alt="2" src="https://github.com/user-attachments/assets/6909a9d7-f358-45bc-b3fd-ed0325250aba" />
 
