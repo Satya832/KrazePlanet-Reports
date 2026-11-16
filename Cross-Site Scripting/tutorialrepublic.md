@@ -9,8 +9,11 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists in the search bar fe
 
 ## Steps to Reproduce
 1.Navigate to the target application: [https://tutorialrepublic.pwnedbox.site/](https://tutorialrepublic.pwnedbox.site/)
+
 2.Locate the search input field in the top navigation bar.
+
 3.Enter the XSS payload: <script>alert(1)</script> into the search bar and submit.
+
 4.Observe that the script executes and triggers an alert pop-up with the value 1, confirming the reflection and execution of the injected script via the q parameter ([https://tutorialrepublic.pwnedbox.site/?q=](https://tutorialrepublic.pwnedbox.site/?q=)<script>alert(1)</script>).
 
 ## POC (Proof of Concept)
@@ -22,5 +25,7 @@ An attacker can craft a malicious link containing an XSS payload in the search p
 
 ## Remediation
 1.Implement context-aware output encoding for all user input rendered in the HTTP response (converting special characters like <, >, &, ", and ' to HTML entities).
+
 2.Validate and sanitize input parameters on the server side before reflection.
+
 3.Deploy a Content Security Policy (CSP) to restrict unauthorized script execution.
