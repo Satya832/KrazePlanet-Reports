@@ -29,7 +29,7 @@ A Reflected Cross-Site Scripting (XSS) vulnerability was discovered in the searc
 
 ## Impact
 <!-- Explain what an attacker could achieve, who could be affected, and the realistic security consequences. -->
-An attacker exploiting this Reflected XSS vulnerability can successfully execute arbitrary JavaScript code within the context of a victim's browser session. This can lead to severe security consequences, including session hijacking, the theft of sensitive session cookies or authentication tokens, malicious DOM manipulation for targeted phishing attacks, and the execution of unauthorized actions on behalf of the authenticated user.
+An attacker can execute arbitrary JavaScript in a victim's browser session, enabling session hijacking, token theft, phishing, and unauthorized actions.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
 1. Use context-aware output encoding.
