@@ -39,8 +39,9 @@ Since the injection occurs directly within HTML form input value attributes (<in
 3.Forced Actions: Performing unauthorized actions or requests on behalf of the authenticated user within the application context.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
-1.Implement strict HTML attribute encoding for all user-supplied data rendered inside HTML tags or attributes (such as converting double quotes " to &quot;, single quotes ' to &#x27;, and ampersands & to &amp;), preventing attackers from breaking out of attribute boundaries.
+## Remediation
+1. Implement strict HTML attribute encoding for all user-supplied data rendered inside HTML tags or attributes (such as converting double quotes `"` to `&quot;`, single quotes `'` to `&#x27;`, and ampersands `&` to `&amp;`), preventing attackers from breaking out of attribute boundaries.
+   
+2. Validate and sanitize all input accepted through `fname` and `lname` parameters to reject unexpected control characters or HTML syntax.
 
-2.Validate and sanitize all input accepted through fname and lname parameters to reject unexpected control characters or HTML syntax.
-
-3.Deploy a strong CSP header that restricts inline script execution (unsafe-inline) to mitigate potential XSS impacts even if reflection occurs.
+3. Deploy a strong CSP header that restricts inline script execution (`unsafe-inline`) to mitigate potential XSS impacts even if reflection occurs.
