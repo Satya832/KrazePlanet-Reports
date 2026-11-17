@@ -38,5 +38,7 @@ Successful exploitation allows an attacker to execute arbitrary JavaScript withi
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
 1.Implement strict context-aware HTML attribute encoding (converting characters like `"` to `&quot;`, `'` to `&#x27;`, and `<` to `&lt;`) for all reflected user input.
+
 2.Avoid reliance on fragile blacklist filters or signature stripping for input validation.
+
 3.Deploy a strict Content Security Policy (CSP) header restricting inline script execution (`unsafe-inline`).
