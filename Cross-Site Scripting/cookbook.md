@@ -32,13 +32,11 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists within the fname and
 
 <img width="1920" height="968" alt="3" src="https://github.com/user-attachments/assets/81e47a3d-e794-419e-967a-41dc3c53ec03" />
 
-
 ## Impact
 <!-- Explain what an attacker could achieve, who could be affected, and the realistic security consequences. -->
 Successful exploitation allows an attacker to execute arbitrary JavaScript within a victim's browser session via malicious links. This can lead to session token theft, account takeover, unauthorized actions performed on behalf of the user, and DOM-based phishing attacks.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
-## Remediation
 1.Implement strict context-aware HTML attribute encoding (converting characters like `"` to `&quot;`, `'` to `&#x27;`, and `<` to `&lt;`) for all reflected user input.
 2.Avoid reliance on fragile blacklist filters or signature stripping for input validation.
 3.Deploy a strict Content Security Policy (CSP) header restricting inline script execution (`unsafe-inline`).
