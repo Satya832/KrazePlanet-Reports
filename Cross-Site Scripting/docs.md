@@ -23,7 +23,9 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists within the applicati
 
 
 2.x8scan Results:
+
       `echo "[https://docs.pwnedbox.site/](https://docs.pwnedbox.site/)" | x8scan`
+      
 <img width="1920" height="1021" alt="2" src="https://github.com/user-attachments/assets/0f03f7a3-c803-4ee8-8117-c53d161c5116" />
 
 3.Payload: 
