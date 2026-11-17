@@ -18,7 +18,9 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists within the fname and
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1.Input form populated with the exact payloads.
-  fname: s@t"><img src=x onerror=alert('First')>   
+
+  fname: s@t"><img src=x onerror=alert('First')> 
+  
   lname: s@t"><scRipt>alert("Last")</scriPt>
 
 <img width="1920" height="972" alt="1" src="https://github.com/user-attachments/assets/2d323b0a-e359-4f81-96af-50b9ce8fa49e" />
@@ -36,8 +38,7 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists within the fname and
 Successful exploitation allows an attacker to execute arbitrary JavaScript within a victim's browser session via malicious links. This can lead to session token theft, account takeover, unauthorized actions performed on behalf of the user, and DOM-based phishing attacks.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
-1.Implement strict context-aware HTML attribute encoding (converting characters like " to &quot;, ' to &#x27;, and < to &lt;) for all reflected user input.
-
+## Remediation
+1.Implement strict context-aware HTML attribute encoding (converting characters like `"` to `&quot;`, `'` to `&#x27;`, and `<` to `&lt;`) for all reflected user input.
 2.Avoid reliance on fragile blacklist filters or signature stripping for input validation.
-
-3.Deploy a strict Content Security Policy (CSP) header restricting inline script execution (unsafe-inline).
+3.Deploy a strict Content Security Policy (CSP) header restricting inline script execution (`unsafe-inline`).
