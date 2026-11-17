@@ -23,7 +23,7 @@ A Reflected Cross-Site Scripting (XSS) vulnerability was discovered in the searc
 <img width="1920" height="970" alt="1" src="https://github.com/user-attachments/assets/578c207c-175f-4ec3-97e1-bdac16c18244" />
 
 
-2. The reflection of input inside filter and the resulting alert executions:
+2. The reflection of input through search filter and the resulting alert executions:
 
 <img width="1919" height="967" alt="2" src="https://github.com/user-attachments/assets/c5eace71-2164-48ed-b467-d4973cf33d64" />
 
