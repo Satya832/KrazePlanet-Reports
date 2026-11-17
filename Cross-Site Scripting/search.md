@@ -17,7 +17,11 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists in the form input fi
 4.Observe that the payload breaks out of the input attribute context, leading to the execution of the injected scripts and triggering alert pop-ups ([https://search.pwnedbox.site/?fname=%22%3E%3Cscript%3Ealert%28%22First%22%29%3C%2Fscript%3E&lname=%22%3E%3Cscript%3Ealert%28%22Last%22%29%3C%2Fscript%3E](https://search.pwnedbox.site/?fname=%22%3E%3Cscript%3Ealert%28%22First%22%29%3C%2Fscript%3E&lname=%22%3E%3Cscript%3Ealert%28%22Last%22%29%3C%2Fscript%3E)).
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1.Payload Used: "><script>alert("First")</script> and "><script>alert("Last")</script>
+1.Payload Used: 
+
+   "><script>alert("First")</script> 
+   
+   "><script>alert("Last")</script>
 
 <img width="1920" height="976" alt="4" src="https://github.com/user-attachments/assets/3931139d-444f-4467-a1e1-afd28246f5e7" />
 
