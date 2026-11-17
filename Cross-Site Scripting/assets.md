@@ -13,7 +13,9 @@ A Reflected Cross-Site Scripting (XSS) vulnerability was discovered in the searc
 3.Enter the following payload into the search box:
    ```html
    s@t'><script>alert(1)</script>
+
 4.Click the Search button (or press Enter) to submit the GET request and Observe that the payload breaks out of the data-query attribute and triggers the JavaScript alert(1) popup.
+
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1.Payload Used:
