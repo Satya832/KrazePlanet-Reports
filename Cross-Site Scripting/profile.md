@@ -34,4 +34,4 @@ Successful exploitation of this reflected XSS vulnerability allows an attacker t
 
 2.Discard brittle input filters that target specific terms like alert or confirm, as they can be easily bypassed using alternative vectors like prompt() or case variations.
 
-Enforce Content Security Policy (CSP): Deploy a strong CSP header to restrict the execution of inline scripts and ensure scripts only load from trusted sources.
+3.Deploy a strong CSP header to restrict the execution of inline scripts and ensure scripts only load from trusted sources.
