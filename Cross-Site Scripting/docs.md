@@ -27,6 +27,7 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists within the applicati
 <img width="1920" height="1021" alt="2" src="https://github.com/user-attachments/assets/0f03f7a3-c803-4ee8-8117-c53d161c5116" />
 
 3.Payload: 
+
 `s@t"><iMg src=x onerror=alert(1)>`
 
 <img width="1920" height="969" alt="3" src="https://github.com/user-attachments/assets/4fd3b1f0-0ca6-4568-a8b7-9e81add70740" />
