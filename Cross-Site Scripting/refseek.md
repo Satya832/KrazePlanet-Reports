@@ -32,4 +32,4 @@ An attacker can craft malicious URLs containing script payloads and distribute t
 
 2. Render the search term as text rather than raw HTML; for client-side rendering, use `textContent` instead of `innerHTML`.
 
-3.Implement a robust Content Security Policy (CSP) to restrict inline script execution.
+3. Implement a robust Content Security Policy (CSP) to restrict inline script execution.
