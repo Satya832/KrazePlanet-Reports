@@ -25,7 +25,6 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists on directory.pwnedbo
 
 <img width="1920" height="968" alt="3" src="https://github.com/user-attachments/assets/44cd954d-86cc-4578-9ca8-71db80084474" />
 
-Impact
 ## Impact
 <!-- Explain what an attacker could achieve, who could be affected, and the realistic security consequences. -->
 A crafted URL could cause JavaScript to execute in a victim’s browser under the site’s origin. Depending on the application and its protections, this could expose page data or allow actions available to the victim to be performed from their session.
