@@ -5,16 +5,16 @@ Reflected XSS - Function Name Filter
 ## Description
 **Affected URL:** https://profile.pwnedbox.site/
 
-A Reflected Cross-Site Scripting (XSS) vulnerability exists in the Last Name field. The application reflects the submitted value without context-appropriate HTML encoding. The payload’s `">` prefix breaks out of the quoted attribute context, while the mixed-case `<sCript>` tag and `prompt()` call bypass the application’s blacklist of common JavaScript functions. 
+A Reflected Cross-Site Scripting (XSS) vulnerability exists in the **Last Name** field. The application reflects the submitted value without proper HTML attribute-context encoding. Its function-name filter does not block `prompt()`, and the mixed-case `<scRipT>` tag is accepted, allowing JavaScript to execute in the browser.
 
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
-1. Open `https://profile.pwnedbox.site/` and locate the name form.
+1. Open `https://profile.pwnedbox.site/` and locate the **Last Name** field.
 
-2. Enter this payload in **Last Name**:
+2. Enter this exact payload:
 
    ```text
-   "><sCript>prompt("Last")</sCript>
+   "><scRipT>prompt("Last")</scriPt>
    ```
 
 3. Click **Submit** and observe the `prompt("Last")` dialog.
@@ -22,8 +22,6 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists in the Last Name fie
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1. Payload entered in the **Last Name** field.  
-
-    "><sCript>prompt("Last")</sCript>
 
 <img width="1920" height="968" alt="1" src="https://github.com/user-attachments/assets/af2082df-44e6-448d-b648-400e11e7e9f0" />
 
