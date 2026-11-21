@@ -9,8 +9,11 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists on directory.pwnedbo
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
 1. Open https://directory.pwnedbox.site/ and go to the GET Parameter Reflection form.
+
 2. Enter s@t"><iMg src=x onerror=confirm("First")> in First Name and s@t"><iMg src=x onerror=confirm("Last")> in Last Name.
+
 3. Click Submit and observe confirm("Last") execute first, followed by confirm("First") after dismissing the popup.
+
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1. The form submitted with the mixed-case <iMg> payloads in both name fields.
@@ -31,4 +34,5 @@ A crafted URL could cause JavaScript to execute in a victim’s browser under th
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
 1. HTML-attribute encode fname and lname before placing them in the form’s value attributes—for example, in PHP, use htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8').
+
 2. Remove the <script>-only blacklist and never reflect these parameters as raw HTML; apply context-aware output encoding wherever they are rendered.
