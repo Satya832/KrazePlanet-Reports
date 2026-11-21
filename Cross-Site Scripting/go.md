@@ -9,7 +9,8 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists in the `returnTo` qu
 ## Steps to Reproduce
 1. Open `https://go.pwnedbox.site/` and click the **Account** tab to observe the `returnTo` parameter.
 
-2. Replace the `returnTo` value with `s@t"><script>alert(10)</script>` and open this URL:  
+2. Replace the `returnTo` value with `s@t"><script>alert(10)</script>` and open this URL:
+
    `https://go.pwnedbox.site/?returnTo=s@t"><script>alert(10)</script>`
 3. Observe the `alert(10)` popup execute when the page loads.
    
