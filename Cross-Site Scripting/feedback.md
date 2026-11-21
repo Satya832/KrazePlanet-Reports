@@ -21,11 +21,11 @@ A Reflected Cross-Site Scripting (XSS) vulnerability affects the `fname` and `ln
 
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1.The payloads entered in the **First Name** and **Last Name** fields.  
+1. The payloads entered in the **First Name** and **Last Name** fields.  
 
 <img width="1920" height="970" alt="1" src="https://github.com/user-attachments/assets/47fea875-bb69-4bc0-ac98-e1831d7b1dd9" />
 
-2.The `fname` payload executes and displays the `First` alert. 
+2. The `fname` payload executes and displays the `First` alert. 
 
 <img width="1920" height="968" alt="2" src="https://github.com/user-attachments/assets/314a21a1-382b-4fa7-8faa-d2d1be6e651c" />
 
