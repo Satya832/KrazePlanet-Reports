@@ -17,19 +17,19 @@ The search parameter is processed in a way that allows submitted HTML and JavaSc
 3. Submit the search and observe an alert displaying the value of `document.cookie`, including a `PHPSESSID` cookie.
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1. Search field populated with the payload:
+1. Search field with the payload:
 
 <img width="1920" height="969" alt="1" src="https://github.com/user-attachments/assets/39597976-930e-4ede-9c10-71efd6dc67ba" />
 
-2. Search submission executes the payload and displays a cookie value in an alert:
+2. Search results page showing the alert:
 
 <img width="1920" height="967" alt="2" src="https://github.com/user-attachments/assets/746bad99-a608-4900-8937-8775b84a2976" />
 
 ## Impact
 <!-- Explain what an attacker could achieve, who could be affected, and the realistic security consequences. -->
-JavaScript executes in the `pixeleet.pwnedbox.site` origin and can access cookies available to `document.cookie`. The demonstrated alert displays a `PHPSESSID` value; if it identifies an authenticated session, exposure could enable session misuse, depending on server-side session protections.
+A crafted search URL can execute JavaScript in the `pixeleet.pwnedbox.site` origin. As demonstrated, the script can read the `PHPSESSID` cookie. If the value belongs to an authenticated session, an attacker who obtains it may be able to impersonate that session.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
-1. Apply context-appropriate output encoding to the search value wherever it is rendered, and avoid inserting it as executable HTML.
+1. HTML-encode the search term when rendering it in the response; do not insert it as raw HTML.
 
-2. Set session cookies with the `HttpOnly` attribute as defense-in-depth to prevent JavaScript from reading them.
+2. Set the session cookie with the `HttpOnly` attribute to prevent JavaScript access. This is defense-in-depth and does not replace fixing the XSS.
