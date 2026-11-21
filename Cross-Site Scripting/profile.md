@@ -5,33 +5,39 @@ Reflected XSS - Function Name Filter
 ## Description
 **Affected URL:** https://profile.pwnedbox.site/
 
-A Reflected Cross-Site Scripting (XSS) vulnerability exists in the Last Name (lname) form field at [https://profile.pwnedbox.site/](https://profile.pwnedbox.site/), where user input is reflected in the response without proper sanitization. While the application attempts to block common functions like alert and confirm, it relies on an ineffective blacklist that misses vectors such as prompt() and case-insensitive tags like <sCript>, allowing attackers to execute arbitrary JavaScript in a victim's browser session.   
+A Reflected Cross-Site Scripting (XSS) vulnerability exists in the Last Name field. The application reflects the submitted value without context-appropriate HTML encoding. The payload’s `">` prefix breaks out of the quoted attribute context, while the mixed-case `<sCript>` tag and `prompt()` call bypass the application’s blacklist of common JavaScript functions. 
 
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
-1.Open [https://profile.pwnedbox.site/](https://profile.pwnedbox.site/).   
+1. Open `https://profile.pwnedbox.site/` and locate the name form.
 
-2.Enter "><sCript>prompt("Last")</sCript> into the Last Name field and Submit.
+2. Enter this payload in **Last Name**:
+
+   ```text
+   "><sCript>prompt("Last")</sCript>
+   ```
+
+3. Click **Submit** and observe the `prompt("Last")` dialog.
      
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1.Payload: 
+1. Payload entered in the **Last Name** field.  
 
     "><sCript>prompt("Last")</sCript>
 
 <img width="1920" height="968" alt="1" src="https://github.com/user-attachments/assets/af2082df-44e6-448d-b648-400e11e7e9f0" />
 
-2.Execution of the JavaScript prompt dialogs upon page load:
+2. The reflected payload executes and displays the prompt dialog.  
 
 <img width="1920" height="978" alt="2" src="https://github.com/user-attachments/assets/472d35b3-9f9f-468a-8f2d-e034d6973095" />
 
 ## Impact
 <!-- Explain what an attacker could achieve, who could be affected, and the realistic security consequences. -->
-Successful exploitation of this reflected XSS vulnerability allows an attacker to craft a malicious link targeting [https://profile.pwnedbox.site/](https://profile.pwnedbox.site/) to steal session cookies, hijack user accounts, or execute unauthorized actions on behalf of the victim. Because the payload reflects directly in the browser context, attackers can also manipulate the DOM to inject phishing elements or redirect users to malicious domains.
+The payload executes JavaScript in the victim’s browser under the `profile.pwnedbox.site` origin. Depending on the page’s functionality and accessible data, this could allow page manipulation or actions to be performed through the victim’s browser session.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
-1.Apply context-aware HTML encoding to all user-supplied input before reflecting it in the HTTP response so special characters are neutralized.
+1. HTML-attribute encode `lname` wherever it is reflected. In PHP, use `htmlspecialchars($lname, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')`.
 
-2.Discard brittle input filters that target specific terms like alert or confirm, as they can be easily bypassed using alternative vectors like prompt() or case variations.
+2. Remove blacklist checks for specific function names or tag casing; render the user-supplied value as data, not raw HTML.
 
 3.Deploy a strong CSP header to restrict the execution of inline scripts and ensure scripts only load from trusted sources.
