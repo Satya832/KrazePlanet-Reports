@@ -5,7 +5,7 @@ Reflected XSS - PUBG
 ## Description
 **Affected URL:** https://assets.pwnedbox.site/
 <!-- Explain what the vulnerability is, where it exists, and why it is a security issue. Include the affected URL or endpoint. -->
-A Reflected Cross-Site Scripting (XSS) vulnerability exists on the application via the p parameter. The input supplied in the search/filter functionality is unsanitized and reflected directly inside a HTML attribute (data-query='...') without proper encoding or HTML entity conversion. This allows an attacker to inject and execute arbitrary JavaScript code in the context of a victim's browser session.
+A Reflected Cross-Site Scripting (XSS) vulnerability exists in the search/filter functionality. The value submitted through the `p` parameter is reflected inside the single-quoted `data-query` HTML attribute without proper attribute-context encoding. A quote in the input can break out of the attribute and inject markup, allowing the supplied script to execute in the browser.
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
 1. Open `https://assets.pwnedbox.site/` and locate the search or filter field.
