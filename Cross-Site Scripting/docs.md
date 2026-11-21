@@ -29,7 +29,7 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists in the `q` GET param
 
 3. The payload in the `q` parameter triggers the `alert(1)` dialog.  
 
-      s@t"><iMg src=x onerror=alert(1)>
+      `s@t"><iMg src=x onerror=alert(1)>`
 
 <img width="1920" height="969" alt="3" src="https://github.com/user-attachments/assets/4fd3b1f0-0ca6-4568-a8b7-9e81add70740" />
 
