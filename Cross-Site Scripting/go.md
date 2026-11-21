@@ -11,9 +11,9 @@ Because the input is rendered raw inside double quotes (`<a href="...">`), an at
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
 1. Navigate to `https://go.pwnedbox.site/` and click on the **Account** tab in the navigation bar.
 2. Observe that the URL updates to `https://go.pwnedbox.site/?returnTo=https://accounts.shopify.com`.
-3. Replace the `returnTo` parameter value with the following payload to break out of the `href` attribute and inject a script tag:
-   ```text
-   [https://go.pwnedbox.site/?returnTo=s@t](https://go.pwnedbox.site/?returnTo=s@t)"><script>alert(10)</script>
+3. Replace the `returnTo` parameter value with `s@t"><script>alert(10)</script>` so the full URL is:
+
+   `https://go.pwnedbox.site/?returnTo=s@t"><script>alert(10)</script>`
 4. Load the URL in a browser and observe the alert(10) popup box executing immediately upon page load.
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
@@ -21,7 +21,7 @@ Because the input is rendered raw inside double quotes (`<a href="...">`), an at
 
 <img width="1920" height="968" alt="1" src="https://github.com/user-attachments/assets/827a1dd1-3c8f-44f4-83f2-188e3328c803" />
 
-2.  Payload execution (alert(10)) in the browser:
+2.  Payload execution (alert(10) in the browser:
 
 <img width="1920" height="969" alt="2" src="https://github.com/user-attachments/assets/3207f18a-b784-4b8c-bbb0-d152f59b5170" />
 
