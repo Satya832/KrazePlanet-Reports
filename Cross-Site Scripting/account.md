@@ -8,9 +8,16 @@ Reflected XSS - Extended Function Filter
 A Reflected Cross-Site Scripting (XSS) vulnerability exists in the lname GET parameter on the GET Parameter Reflection form. The parameter is reflected without proper HTML attribute-context encoding, allowing the input to break out of the form field’s value attribute and inject an <Img> element. Its invalid src triggers the onerror handler; the JavaScript Unicode escape \u0061 is interpreted as a, resulting in execution of alert(1).
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
-1. Open https://account.pwnedbox.site/ and go to the GET Parameter Reflection form.
-2. Leave First Name blank and enter s@t"> <Img src=x onerror=\u0061lert(1)> in Last Name.
-3. Click Submit and observe the alert(1) popup.
+## Steps to Reproduce
+1. Open `https://account.pwnedbox.site/` and go to the GET Parameter Reflection form.
+2. Leave **First Name** blank and enter the following payload in **Last Name**:
+
+   ```text
+   s@t"> <Img src=x onerror=\u0061lert(1)>
+   ```
+
+3. Click **Submit** and observe the `alert(1)` popup.
+
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1. The form is submitted with the payload in Last Name and First Name left blank.
