@@ -5,10 +5,10 @@ Reflected XSS - Search Filter Bypass
 ## Description
 **Affected URL:** https://kb.pwnedbox.site/
 <!-- Explain what the vulnerability is, where it exists, and why it is a security issue. Include the affected URL or endpoint. -->
-A Reflected Cross-Site Scripting (XSS) vulnerability affects the catalog’s `category` and `sort` query parameters. The crafted request supplies script markup through both parameters, and the page executes the injected JavaScript, demonstrating that the reflected input is not safely handled.
+A Reflected Cross-Site Scripting (XSS) issue is demonstrated by supplying script markup in the catalog filter query parameters. The browser executes `alert(1)`, indicating that query-string input is reaching an executable context without appropriate handling. The captured request includes payloads in both parameters; test each parameter individually to confirm which one triggers execution.
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
-1. Open `https://shop.pwnedbox.site/` and interact with a category filter to observe the `category` and `sort` parameters in the URL.
+1. Open `https://shop.pwnedbox.site/` and use the **Chemistry** category filter to observe the `category` and `sort` parameters in the URL.
 
 2. Open this URL with the payloads in both parameters:
 
