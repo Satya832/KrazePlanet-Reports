@@ -8,10 +8,9 @@ Reflected XSS - Shopify
 A Reflected Cross-Site Scripting (XSS) vulnerability exists in the `returnTo` query parameter on `go.pwnedbox.site`. During the Account flow, the application reflects this user-controlled value directly into the quoted `href` attribute of the **“Cancel & return”** link without HTML attribute encoding. An attacker can use `">` to break out of the attribute and inject a `<script>` element, which executes when the page loads.
 ## Steps to Reproduce
 1. Open `https://go.pwnedbox.site/` and click the **Account** tab to observe the `returnTo` parameter.
-2. Open this crafted URL:
 
-   `https://go.pwnedbox.site/?returnTo=s%40t%22%3E%3Cscript%3Ealert%2810%29%3C%2Fscript%3E`
-
+2. Replace the `returnTo` value with `s@t"><script>alert(10)</script>` and open this URL:  
+   `https://go.pwnedbox.site/?returnTo=s@t"><script>alert(10)</script>`
 3. Observe the `alert(10)` popup execute when the page loads.
    
 ## POC (Proof of Concept)
