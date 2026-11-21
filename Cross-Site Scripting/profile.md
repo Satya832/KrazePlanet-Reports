@@ -38,4 +38,4 @@ The payload executes JavaScript in the victim’s browser under the `profile.pwn
 
 2. Remove blacklist checks for specific function names or tag casing; render the user-supplied value as data, not raw HTML.
 
-3.Deploy a strong CSP header to restrict the execution of inline scripts and ensure scripts only load from trusted sources.
+3. Deploy a strong CSP header to restrict the execution of inline scripts and ensure scripts only load from trusted sources.
