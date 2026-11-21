@@ -5,7 +5,7 @@ Reflected XSS - Reddit
 ## Description
 **Affected URL:** https://widgets.pwnedbox.site/
 <!-- Explain what the vulnerability is, where it exists, and why it is a security issue. Include the affected URL or endpoint. -->
-The `post_id` path value is reflected into an unquoted HTML `id` attribute without appropriate encoding. Injected markup can create an `<img>` element whose `onerror` handler executes JavaScript when the page loads.
+The `post_id` path segment is reflected into an unquoted HTML `id` attribute without appropriate encoding. A crafted value can break out of the attribute and inject an image element whose `onerror` handler executes JavaScript. The proof of concept displays an alert containing `1`.
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
 1. Open `https://widgets.pwnedbox.site/index.php/svc/shreddit/api/comments/askreddit/t3_u9po1l/t1_i5sxroa`.
@@ -14,7 +14,7 @@ The `post_id` path value is reflected into an unquoted HTML `id` attribute witho
    ```text
    t3_u9po1ls@t><img src=x onerror=alert(1)>
    ```
-3. Load the modified URL and observe an alert displaying `1`. The browser may show spaces in the URL as `%20`.
+3. Load the modified URL and observe an alert displaying `1`.
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1. Original comments page and route:
@@ -31,7 +31,7 @@ The `post_id` path value is reflected into an unquoted HTML `id` attribute witho
 
 ## Impact
 <!-- Explain what an attacker could achieve, who could be affected, and the realistic security consequences. -->
-A crafted link can execute JavaScript in the `widgets.pwnedbox.site` origin when opened. Depending on the application’s functionality and the visitor’s access, this could allow page manipulation or actions and access to data available to same-origin JavaScript.
+Opening a crafted link can execute JavaScript in the `widgets.pwnedbox.site` origin. Depending on the victim’s access and the site’s functionality, this could allow page manipulation or actions and data access available to same-origin JavaScript.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
 1. Quote the `id` attribute and apply HTML-attribute context encoding to `post_id` before rendering it.
