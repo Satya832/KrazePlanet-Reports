@@ -5,27 +5,25 @@ Reflected XSS - GIGW: Government Website Guidelines Portal
 ## Description
 **Affected URL:** https://guidelines.pwnedbox.site/
 
-A Reflected Cross-Site Scripting (XSS) vulnerability exists in the search functionality of the portal. The application accepts user input through the search query parameter (s) and reflects it directly into the response page without proper sanitization or output encoding, allowing arbitrary JavaScript execution in the browser of any user who accesses a crafted link.
+A Reflected Cross-Site Scripting (XSS) vulnerability exists in the search functionality on `guidelines.pwnedbox.site`. The application reflects the user-controlled `s` query parameter in the response without proper output encoding. As a result, script markup supplied as the search query executes in the browser when the crafted URL is loaded.
 
 ## Steps to Reproduce
-1.Navigate to the target application: [https://guidelines.pwnedbox.site/](https://guidelines.pwnedbox.site/)
+1. Open `https://guidelines.pwnedbox.site/` and locate the search field.
+  
+2. Enter `<script>alert(1)</script>` in the search field and submit it. Alternatively, open this URL directly:
 
-2.Locate the search input field in the header navigation or the search section.
+   `https://guidelines.pwnedbox.site/index.php?s=<script>alert(1)</script>`
 
-3.Enter the XSS payload: <script>alert(1)</script> and submit the search.
-
-4.Observe that the script executes and triggers an alert box with the value 1, confirming the vulnerability via the s parameter ([https://guidelines.pwnedbox.site/index.php?s=](https://guidelines.pwnedbox.site/index.php?s=)<script>alert(1)</script>).
+3. Observe the `alert(1)` popup.
 
 ## POC (Proof of Concept)
+1. The `s` parameter payload executes and displays the `alert(1)` popup. 
 <img width="1920" height="970" alt="2" src="https://github.com/user-attachments/assets/22b018fd-c372-4fcd-b8e5-f06db64ada2f" />
-
 
 ## Impact
 An attacker can craft malicious URLs containing script payloads and trick visitors into clicking them via phishing or external links. When clicked, the injected script executes within the victim's browser session, enabling attackers to hijack sessions, steal sensitive cookies, or perform actions on behalf of the user.
 
 ## Remediation
-1.Implement context-aware output encoding for all user-supplied input before rendering it back in the HTML response (escaping special characters like <, >, &, ", and ').
+1. HTML-encode `s` wherever it is reflected in the response. In PHP, use `htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')` for HTML output.
 
-2.Apply strict server-side input validation and sanitization for the search query parameter (s).
-
-3.Deploy a robust Content Security Policy (CSP) to mitigate inline script execution risks.
+2. If the query is rendered client-side, insert it as text using `textContent` rather than treating it as HTML.
