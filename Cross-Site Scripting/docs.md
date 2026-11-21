@@ -5,30 +5,29 @@ Reflected XSS - Page Heading
 ## Description
 **Affected URL:** https://docs.pwnedbox.site/
 <!-- Explain what the vulnerability is, where it exists, and why it is a security issue. Include the affected URL or endpoint. -->
-A Reflected Cross-Site Scripting (XSS) vulnerability exists within the application at docs.pwnedbox.site. Standard form fields (First Name and Last Name) do not reflect user input. However, enumeration using the x8scan tool revealed a hidden q GET parameter that reflects user-supplied input directly into the page heading. The application filters standard <script> tags, but accepts mixed-case or alternative vectors like an iMg tag with an onerror event handler. An attacker can use double quotes and closing brackets (">) to break out of the attribute/heading context and execute arbitrary JavaScript.
+A Reflected Cross-Site Scripting (XSS) vulnerability exists in the `q` GET parameter on `docs.pwnedbox.site`. Although this parameter is not exposed in the visible form, it can be supplied directly in the request and is reflected into the page heading without HTML output encoding. The application filters `<script>` tags but accepts an `<iMg>` element with an `onerror` handler. The reflected markup is parsed as HTML, causing the handler to execute when the image fails to load.
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
-1.Run the x8scan tool against the target URL to discover hidden parameters: echo "[https://docs.pwnedbox.site/](https://docs.pwnedbox.site/)" | x8scan.   
+1. Open `https://docs.pwnedbox.site/`.
 
-2.Identify the discovered hidden parameter (q) which reflects input in the page heading.   
+2. Open the following URL with the payload supplied directly in the `q` parameter:
 
-3.Navigate to the crafted vulnerable URL containing the payload: [https://docs.pwnedbox.site/?q=s%40t%22%3E%3CiMg%20src%3Dx%20onerror%3Dalert(1](https://docs.pwnedbox.site/?q=s%40t%22%3E%3CiMg%20src%3Dx%20onerror%3Dalert(1))>.   
+   ```text
+   https://docs.pwnedbox.site/?q=s@t"><iMg src=x onerror=alert(1)>
+   ```
 
-4.Observe the execution of the JavaScript alert dialog.  
+3. Observe the `alert(1)` dialog.
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1.Vulnerable site:
+1. Vulnerable site:
 
 <img width="1920" height="973" alt="1" src="https://github.com/user-attachments/assets/14d0294c-81b0-4ad0-b0a0-9185438e67fb" />
 
-
-2.x8scan Results:
-
-      echo "[https://docs.pwnedbox.site/](https://docs.pwnedbox.site/)" | x8scan
+2. Running `echo "https://docs.pwnedbox.site/" | x8scan` identifies the `q` parameter.  
       
 <img width="1920" height="1021" alt="2" src="https://github.com/user-attachments/assets/0f03f7a3-c803-4ee8-8117-c53d161c5116" />
 
-3.Payload: 
+3. The payload in the `q` parameter triggers the `alert(1)` dialog.  
 
       s@t"><iMg src=x onerror=alert(1)>
 
@@ -36,11 +35,9 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists within the applicati
 
 ## Impact
 <!-- Explain what an attacker could achieve, who could be affected, and the realistic security consequences. -->
-Successful exploitation allows an attacker to execute arbitrary JavaScript within a victim's browser session via malicious links. This can lead to session token theft, account takeover, unauthorized actions performed on behalf of the user, and DOM-based phishing attacks.
+An attacker could trick a victim into opening a crafted link, causing JavaScript to execute under the `docs.pwnedbox.site` origin. This could allow the attacker to alter page content or access data available to scripts on the page.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
-1.Implement strict context-aware HTML output encoding for all reflected user input.
+1. HTML-encode `q` before reflecting it in the page heading. In PHP, use `htmlspecialchars($q, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')`.
 
-2.Avoid reliance on fragile blacklist filters or signature stripping for input validation.
-
-3.Deploy a strict Content Security Policy (CSP) header restricting inline script execution (unsafe-inline).
+2. Render `q` as text rather than raw HTML. For client-side rendering, use `textContent` instead of `innerHTML`.
