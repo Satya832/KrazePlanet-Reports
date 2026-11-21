@@ -10,8 +10,7 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists on `support.pwnedbox
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
 1. Open `https://support.pwnedbox.site/` and go to the GET Parameter Reflection form.
 2. Enter `s@t"> <scRipt>alert("First")</scriPt>` in **First Name** and `s@t"> <scRipt>alert("Last")</scriPt>` in **Last Name**.
-3. Click **Submit** and observe the URL update with `fname` and `lname` parameters.
-4. Observe `alert("First")` execute first, followed by `alert("Last")` after dismissing the popup.
+3. Click **Submit** and observe `alert("First")` execute first, followed by `alert("Last")` after dismissing the popup.
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
 1. Entering mixed-case `<scRipt>` payloads in First Name and Last Name and submitting the form:
