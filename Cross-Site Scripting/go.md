@@ -35,6 +35,6 @@ Because the input is rendered raw inside double quotes (`<a href="...">`), an at
 An attacker who tricks a victim into opening a crafted link can execute arbitrary JavaScript in the victim's browser session on go.pwnedbox.site to access exposed account data or session tokens, perform unauthorized actions on the account page, or redirect the user to a phishing page.
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
-1.  HTML-encode returnTo with htmlspecialchars($returnTo, ENT_QUOTES, 'UTF-8') inside <a href="...">.   
+1.  HTML-encode returnTo with htmlspecialchars($returnTo, ENT_QUOTES, 'UTF-8') inside `<a href="...">`.   
 2.  Allowlist valid redirect targets (such as relative paths or https://accounts.shopify.com) and reject untrusted URLs.
 3.  Enforce safe URL schemes (https:// or relative paths) and block javascript: or data: URIs.
