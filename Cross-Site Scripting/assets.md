@@ -8,28 +8,29 @@ Reflected XSS - PUBG
 A Reflected Cross-Site Scripting (XSS) vulnerability exists on the application via the p parameter. The input supplied in the search/filter functionality is unsanitized and reflected directly inside a HTML attribute (data-query='...') without proper encoding or HTML entity conversion. This allows an attacker to inject and execute arbitrary JavaScript code in the context of a victim's browser session.
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
-1. Open a browser and navigate to [https://assets.pwnedbox.site/](https://assets.pwnedbox.site/).
+1. Open `https://assets.pwnedbox.site/` and locate the search or filter field.
 
-2. Locate the search or filter input field.
+2. Enter this payload into the field:
 
-3. Enter the following payload: s@t'><script>alert(1)</script>
+   ```text
+   s@t'><script>alert(1)</script>
+   ```
 
-4. Click the Search button (or press Enter).Then observe that the payload breaks out of the data-query attribute and executes the JavaScript code, triggering an alert(1) popup.
+3. Click **Search** or press **Enter**, then observe the `alert(1)` popup.
 
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1. Payload input in the search field
+1. Payload entered in the search field.
    
        s@t'><script>alert(1)</script>
 
 <img width="1920" height="970" alt="1" src="https://github.com/user-attachments/assets/21e8f06f-3b26-4421-9308-518c9461483b" />
 
-
-2. Execution of the alert(1) popup triggering/reflecting the XSS :
+2. The injected payload executes and displays the `alert(1)` popup.  
 
 <img width="1919" height="967" alt="2" src="https://github.com/user-attachments/assets/6c602aaa-3bb4-48e3-9385-3e827fcf6688" />
 
-3. Page source view showing the vulnerable response
+3. Page source showing the vulnerable reflection in the `data-query` attribute. 
 
 <img width="1920" height="967" alt="3" src="https://github.com/user-attachments/assets/f5726f00-1c3b-4f9e-ad2d-dadf0d1addae" />
 
