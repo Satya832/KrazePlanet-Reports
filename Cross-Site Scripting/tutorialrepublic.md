@@ -31,4 +31,4 @@ An attacker can craft a malicious link containing an XSS payload in the search p
 
 2. If the search value is rendered client-side, insert it as text using `textContent` rather than treating it as HTML.
 
-3.Deploy a Content Security Policy (CSP) to restrict unauthorized script execution.
+3. Deploy a Content Security Policy (CSP) to restrict unauthorized script execution.
