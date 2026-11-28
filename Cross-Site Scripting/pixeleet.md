@@ -17,27 +17,27 @@ A Reflected Cross-Site Scripting (XSS) vulnerability exists in the search bar fu
 5. Open a separate unauthenticated browser session, navigate to https://pixeleet.pwnedbox.site/, open Developer Tools (Storage > Cookies), replace the PHPSESSID cookie value with the stolen session token (5ade3ac9a79d80b4e9bdab25cb4762ec), and refresh the page to gain full access to the victim's account (satya_victim).
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1. Landing & Sign-In Page: Shows the Pixeleet homepage at https://pixeleet.pwnedbox.site/ with the Join button highlighted.
+1. Landing & Sign-In Page
 
 <img width="1920" height="969" alt="1" src="https://github.com/user-attachments/assets/cd33ca68-c9a3-4923-a83c-2c056ffd918f" />
 
-2. Victim Account Registration: Shows the registration form at https://pixeleet.pwnedbox.site/index.php?action=register used to create the victim account (satya_victim).
+2. Victim Account Registration
 
 <img width="1920" height="968" alt="2" src="https://github.com/user-attachments/assets/5a6f0f13-d2d8-47c9-83ea-8922fa388fb1" />
 
-3. Payload Injection in Search Bar: Shows the logged-in victim profile (satya_victim) on https://pixeleet.pwnedbox.site/index.php with the malicious XSS payload entered into the top search bar.
+3. Payload Injection in Search Bar
 
 <img width="1920" height="966" alt="3" src="https://github.com/user-attachments/assets/0cac3d2d-2393-44c9-9361-7698b6c3f866" />
 
-4. Cookie Exfiltration via Burp Collaborator: Shows Burp Collaborator receiving the out-of-band HTTP GET request containing the victim's stolen session cookie (GET /PHPSESSID=5ade3ac9a79d80b4e9bdab25cb4762ec).
+4. Cookie Exfiltration via Burp Collaborator
 
 <img width="1920" height="1020" alt="4" src="https://github.com/user-attachments/assets/d3844f12-dc85-4027-a9a3-b4558ab94cad" />
 
-5. Session Hijacking in Attacker Browser: Shows the attacker's unauthenticated browser session where the stolen PHPSESSID value (5ade3ac9a79d80b4e9bdab25cb4762ec) is injected into cookie storage before refreshing.
+5. Session Hijacking in Attacker Browser
 
 <img width="1920" height="971" alt="5" src="https://github.com/user-attachments/assets/b0e73f73-0982-422b-ab92-ceb06b779c9e" />
 
-6. Account Takeover Confirmed: Shows full access to the satya_victim (satya1234@gmail.com) account after refreshing the page with the hijacked session cookie.
+6. Account Takeover Confirmed
 
 <img width="1920" height="964" alt="6" src="https://github.com/user-attachments/assets/29f60aa4-624b-4c53-a038-558b2788d0e0" />
 
